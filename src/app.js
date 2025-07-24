@@ -28,13 +28,13 @@ app.post("/signup", async (req, res) => {
 
    
 
-    // ✅ Check using the correct field: emailId
+   
     const existingUser = await User.findOne({ emailId });
     if (existingUser) {
       return res.status(400).send("User already exists");
     }
 
-    // ✅ Create new user from request body
+   
     const user = new User({
       firstName,
       lastName,
@@ -74,9 +74,10 @@ app.post("/login", async (req, res) => {
       throw new Error("invalid password");
     }
 // create a JWT token 
-const token   = await jwt.sign({_id:user._id},"DEV@tinder7680",{
-  expiresIn:"7d",
-});
+// const token   = await jwt.sign({_id:user._id},"DEV@tinder7680",{
+//   expiresIn:"7d",
+// });
+const token = await user.getJWT();
 console.log("Generated token:", token);
    
 // Add the token to cookie and send the responce back to the user
@@ -184,9 +185,6 @@ app.patch("/user/:userId", async (req, res) => {
   }
 });
 
-
-
-
 // Delete the data:
 app.delete("/user",async (req,res)=> {
   const userId = req.query.userId;
@@ -206,3 +204,5 @@ app.delete("/user",async (req,res)=> {
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 });
+
+
