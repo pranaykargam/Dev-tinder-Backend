@@ -69,7 +69,7 @@ app.post("/login", async (req, res) => {
       throw new Error("invalid email id");
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await user.validatePassword(password);
     if (!isPasswordValid) {
       throw new Error("invalid password");
     }
