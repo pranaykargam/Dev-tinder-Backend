@@ -8,9 +8,9 @@
 ## profileRouter
 - get/profile/view
 - patch/profile/edit
-- patch/profile/password
+- patch/profile/password // forgot password API
 
-## connectionRequestRouter
+## RequestRouter
 - POST /request/send/intrested/:userId
 - POST /request/send/rejected/:userId
 - POST /request/review/accepted/:requestId

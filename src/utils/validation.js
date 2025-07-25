@@ -17,7 +17,26 @@ if (skills && skills.length > 30) {
   }
 }
 
+const validateEditProfileData = (req)=> {
+    const allowedEditFields = [
+       "firstName",
+       "lastName",
+       "age",
+       "emailId",
+       "photoUrl",
+       "gender",
+       "about",
+       "skills",
+
+]
+  const isEditAllowed = Object.keys(req.body).every((field)=>{
+    return allowedEditFields.includes(field)
+  })
+  return isEditAllowed
+}
+
 module.exports = {
     validateSignUpData,
+    validateEditProfileData
   };
   
