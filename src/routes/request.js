@@ -60,5 +60,43 @@ if (existingConnectionRequest) {
  }
   })
 
+requestsRouter.post("/request/review/:status/:requestId",UserAuth,async(req,res)=>{
+  
+  try{
+    const loggedInUser = req.user;
+    const {status,requestId} = req.params;
+
+   const allowedStatus = ["accepted", "rejected"]
+   if(!allowedStatus.includes(status)){
+    return res.status(400).json({message:"Invalid status type:" +status})
+   }
+  
+
+   const ConnectionRequest = await ConnectionRequest.findOne({
+    _id: requestId,
+    toUserId: loggedInUser._id,
+    status:"interested" // Only allow review if the status is 'interested'
+   })
+   if(!ConnectionRequest){
+    return res.status(404).json({message:"Connection request not found "})
+   }
+
+   ConnectionRequest.status = status
+
+   const data = await ConnectionRequest.save();
+
+    
+    
+    // validate the status
+    // sunny -> dhoni
+    // loggedInId -> toUserID
+    // status -> intrested
+    // request ID should be valid
+  }catch(err){
+    res.status(400).send("ERROR:"+ err.message);
+  }
+ 
+}),
+
 
   module.exports = requestsRouter;
