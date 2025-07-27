@@ -11,9 +11,10 @@ const profileRouter = require("./routes/profile")
 
 const requestsRouter = require("./routes/request")
 
-app.use("/", authRouter)
-app.use("/", profileRouter)
-app.use("/",requestsRouter)
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestsRouter);
+
 
 
 // Route for fetching user details
