@@ -7,7 +7,9 @@ const bcrypt  = require("bcrypt")
 const userSchema = mongoose.Schema({
   firstName: {
     type: String,
+    
     required:true,
+     // reference to the user collection
     minLength:4,
     maxLength:40
   },

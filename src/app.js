@@ -11,9 +11,12 @@ const profileRouter = require("./routes/profile")
 
 const requestsRouter = require("./routes/request")
 
+const userRouter = require("./routes/user");
+
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestsRouter);
+app.use("/", userRouter);
 
 
 
