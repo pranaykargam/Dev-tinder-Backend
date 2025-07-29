@@ -69,11 +69,13 @@ requestsRouter.post("/request/review/:status/:requestId", UserAuth, async (req, 
     const loggedInUser = req.user;
     const { status, requestId } = req.params;
 
-    // 1. Validate status
-    const allowedStatus = ["accepted", "rejected"];
-    if (!allowedStatus.includes(status)) {
-      return res.status(400).json({ message: "Invalid status type: " + status });
-    }
+     // ✅ 1. Allow only "accepted" or "rejected"
+     const allowedStatus = ["accepted", "rejected"];
+     if (!allowedStatus.includes(status.toLowerCase())) {
+       return res.status(400).json({
+         message: `Invalid status type: '${status}'. Allowed values: accepted, rejected.`
+       });
+     }
 
     // 2. Validate requestId format
     if (!mongoose.Types.ObjectId.isValid(requestId)) {
