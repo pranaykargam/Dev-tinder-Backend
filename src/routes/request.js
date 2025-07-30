@@ -77,40 +77,26 @@ requestsRouter.post("/request/review/:status/:requestId", UserAuth, async (req, 
        });
      }
 
-    // 2. Validate requestId format
-    if (!mongoose.Types.ObjectId.isValid(requestId)) {
-      return res.status(400).json({ message: "Invalid request ID format" });
-    }
-
-    // 3. Fetch the connection request
-    const connectionRequest = await ConnectionRequest.findById(requestId);
-
+     const connectionRequest = await ConnectionRequest.findOne({
+       _id: requestId,
+       toUserId:loggedInUser._id,
+      //  status: "interested"
+     })
     if (!connectionRequest) {
-      return res.status(404).json({ message: "Connection request not found" });
+      return res.status(404).json({ message: "Connection request not found " });
     }
 
-    // 4. Check ownership: user must be the toUser
-    if (connectionRequest.toUserId.toString() !== loggedInUser._id.toString()) {
-      return res.status(403).json({ message: "You are not authorized to review this request." });
-    }
-
-    // 5. Check if current status is 'interested'
-    if (connectionRequest.status !== "interested") {
-      return res.status(400).json({ message: "Only 'interested' requests can be reviewed" });
-    }
-
-    // 6. Update status
     connectionRequest.status = status;
     const data = await connectionRequest.save();
-
     res.json({
-      message: `${req.user.firstName} has ${status} the connection request.`,
+      message: `${loggedInUser.firstName} has ${status} the connection request.`,
       data,
     });
-  } catch (err) {
-    res.status(500).send("ERROR: " + err.message);
-  }
-});
+}catch(err){
+  res.status(400).send("ERROR: " + err.message);
+ }
+})
+
 
   
        
