@@ -100,9 +100,29 @@ userRouter.get("/user/feed", UserAuth, async (req, res) => {
         res.status(400).json({message: err.message});
     }
 })
- // bsdhfv hFBVACHVRGFGhgfdgbdv agbfh
- //qwertyuiop[asdfghjkl;,mnbvcxzertyuop;l
- //gfykv rWFOJHNGYFXDFCGVHJKL;]
+
+
+// favcg gf eheofiuvegwlfilx sfdjfhcce dwieuG;FUJBF DHIVJRWBJK
+// userRouter.get("/user/profile", UserAuth, async (req, res) => {
+//   try {
+//     const loggedInUser = req.user;
+//     const userProfile = await User.findById(loggedInUser._id).select(USER_SAFE_DATA);
+
+
+//     if (!userProfile) {
+
+//       return res.status(404).json({ message: "User profile not found" });
+//     }
+//     res.json({
+//       message: "User profile fetched successfully",
+//       data: userProfile,
+//     });
+//   } catch (err) {
+//     console.error("Error fetching user profile:", err);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
+  
 
 
 module.exports = userRouter;
