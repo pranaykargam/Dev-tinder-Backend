@@ -28,9 +28,6 @@ requestsRouter.post("/request/send/:status/:toUserId",UserAuth,async(req,res)=>{
     })
    }
 
- 
-
-
 // Validate that fromUserId and toUserId are not the same
 const existingConnectionRequest = await ConnectionRequest.findOne({
   $or: [
