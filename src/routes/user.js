@@ -102,27 +102,51 @@ userRouter.get("/user/feed", UserAuth, async (req, res) => {
 })
 
 
-// favcg gf eheofiuvegwlfilx sfdjfhcce dwieuG;FUJBF DHIVJRWBJK
-// userRouter.get("/user/profile", UserAuth, async (req, res) => {
-//   try {
+// userRouter.get("/user/feed", UserAuth, async (req, res) => {
+ 
+
+//   try{
+//     // User should see all the the user cards except
+//     //  01. his own card
+//     // 02.his connections
+//      // 03.already sent connection requests which are accepted
+//     // 04.ignored connections
+
 //     const loggedInUser = req.user;
-//     const userProfile = await User.findById(loggedInUser._id).select(USER_SAFE_DATA);
+//     const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
+//     let limit = parseInt(req.query.limit) || 10;
+//     limit = limit >50 ? 50:limit; // Limit the maximum number of items per page to 50
+//     const skip = (page - 1) * limit; // Calculate the number of items to skip
 
-
-//     if (!userProfile) {
-
-//       return res.status(404).json({ message: "User profile not found" });
-//     }
-//     res.json({
-//       message: "User profile fetched successfully",
-//       data: userProfile,
+//     // Find all connection requests (sent + received) related to the logged-in user
+//     const connectionRequests = await ConnectionRequest.find({
+//       $or: [ { fromUserId: loggedInUser._id },{ toUserId: loggedInUser._id } ]
+//     }).select("fromUserId toUserId ");
+   
+//     const hideUserfromFeed = new Set();
+//     connectionRequests.forEach((req) => {
+//       hideUserfromFeed.add(req.fromUserId.toString());
+//       hideUserfromFeed.add(req.toUserId.toString());
 //     });
-//   } catch (err) {
-//     console.error("Error fetching user profile:", err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
+   
+
+//     const users = await User.find({
+//       $and:[
+//         {_id: { $nin: Array.from(hideUserfromFeed) } }, // except users in hideUserfromFeed
+//         {_id: { $ne: loggedInUser._id } } // own card
+//       ]
+//     }).select(USER_SAFE_DATA).skip(skip).limit(limit);
+
   
+
+//     res.send(users)
+  
+//   }catch(err){
+//     console.log("Error in /user/feed route:", err);
+//       res.status(400).json({message: err.message});
+//   }
+// })
+
 
 
 module.exports = userRouter;
