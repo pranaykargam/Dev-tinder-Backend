@@ -92,6 +92,44 @@ app.patch("/user/:userId", async (req, res) => {
   }
 });
 
+// app.patch("/user/:userId", async (req, res) => {
+//   const userId = req.params?.userId;
+//   const data = req.body;
+
+//   try {
+//     const ALLOWED_UPDATES = [
+//       "photourl","about","gender","age","skills",
+//     ];
+ 
+//   const isUpdateAllowed = Object.keys(data).every((k) => {
+//     return ALLOWED_UPDATES.includes(k);
+//   });
+  
+//   if(!isUpdateAllowed) {
+//     throw new Error("Update is not allowed")
+//   }
+
+//   if(data?.skills && data.skills.length>30){
+//     throw new Error("more than 30 skills are not allowed")
+//   }
+//     const updatedUser = await User.findByIdAndUpdate(userId, data, {
+//       new: true,
+//       runValidators: true,
+//     });
+
+//     console.log("Updated user:", updatedUser);
+
+//     if (!updatedUser) {
+//       return res.status(404).send("User not found");
+//     }
+
+//     res.send("User updated successfully");
+//   } catch (err) {
+//     console.error("Update error:", err.message);
+//     res.status(400).send("Update failed: " + err.message);
+//   }
+// });
+
 // Delete the data:
 app.delete("/user",async (req,res)=> {
   const userId = req.query.userId;
@@ -105,6 +143,23 @@ app.delete("/user",async (req,res)=> {
     res.status(500).send("something went wrong" );
   }
 })
+
+// app.delete("/user",async (req,res)=> {
+//   const userId = req.query.userId;
+//   console.log("Trying to delete user with ID:", userId);
+//   try {
+    
+//     const user = await User.findByIdAndDelete( userId );
+//       res.send("user deleted successfully");
+//   } 
+//   catch (err) {
+//     res.status(500).send("something went wrong" );
+//   }
+// })
+
+
+
+
 
 
 // Start the server
