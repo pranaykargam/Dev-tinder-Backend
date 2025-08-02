@@ -144,6 +144,19 @@ app.delete("/user",async (req,res)=> {
   }
 })
 
+// app.delete("/user",async (req,res)=> {
+//   const userId = req.query.userId;
+//   console.log("Trying to delete user with ID:", userId);
+//   try {
+    
+//     const user = await User.findByIdAndDelete( userId );
+//       res.send("user deleted successfully");
+//   } 
+//   catch (err) {
+//     res.status(500).send("something went wrong" );
+//   }
+// })
+
 
 //   const userId = req.query.userId;
 //   console.log("Trying to delete user with ID:", userId);
