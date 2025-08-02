@@ -92,7 +92,7 @@ app.patch("/user/:userId", async (req, res) => {
   }
 });
 
-// app.patch("/user/:userId", async (req, res) => {
+
 //   const userId = req.params?.userId;
 //   const data = req.body;
 
@@ -144,7 +144,7 @@ app.delete("/user",async (req,res)=> {
   }
 })
 
-// app.delete("/user",async (req,res)=> {
+
 //   const userId = req.query.userId;
 //   console.log("Trying to delete user with ID:", userId);
 //   try {
@@ -166,5 +166,9 @@ app.delete("/user",async (req,res)=> {
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 });
+
+// app.listen(3000, () => {
+//   console.log("Server is listening on port 3000");
+// });
 
 
