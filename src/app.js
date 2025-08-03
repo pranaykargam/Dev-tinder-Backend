@@ -2,11 +2,10 @@ const express = require("express");
 const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser");
 
-const cors = require('cors');
-
-const app = express();// This is wrong unless you made your own file
 
 
+const app = express()
+const cors = require("cors");
 app.use(cors());
 app.use(express.json()); 
 app.use(cookieParser()); 
