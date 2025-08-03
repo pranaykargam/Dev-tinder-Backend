@@ -49,6 +49,8 @@ authRouter.post("/signup", async (req, res) => {
 
 
 authRouter.post("/login", async (req, res) => {
+  console.log("🔔 Received login request:", req.body);
+  
 
     try {
       const { emailId, password } = req.body;
@@ -74,7 +76,15 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token",token,{
         expires:new Date(Date.now() + 8 * 3600000), 
       });
-      res.send("Login Successfully!!!!!");
+      res.status(200).json({
+        message: "Login Successfully!!!!!",
+        user: {
+          _id: user._id,
+          emailId: user.emailId,
+          name: user.name,
+        },
+        token: token,
+      });
   
     } catch (err) {
       console.error("Login error:", err);

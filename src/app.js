@@ -1,9 +1,16 @@
 const express = require("express");
 const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser");
-const app = express();
+
+const cors = require('cors');
+
+const app = express();// This is wrong unless you made your own file
+
+
+app.use(cors());
 app.use(express.json()); 
 app.use(cookieParser()); 
+
 
 const authRouter = require("./routes/auth")
 
@@ -144,7 +151,7 @@ app.delete("/user",async (req,res)=> {
   }
 })
 
-// app.delete("/user",async (req,res)=> {
+
 //   const userId = req.query.userId;
 //   console.log("Trying to delete user with ID:", userId);
 //   try {
@@ -180,7 +187,7 @@ app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 });
 
-// app.listen(3000, () => {
+
 //   console.log("Server is listening on port 3000");
 // });
 
