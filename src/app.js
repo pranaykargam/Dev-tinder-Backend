@@ -3,10 +3,17 @@ const connectDB = require("./config/database");
 const cookieParser = require("cookie-parser");
 
 
-
 const app = express()
 const cors = require("cors");
-app.use(cors());
+
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Update with your frontend URL
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  }
+
+  ));
 app.use(express.json()); 
 app.use(cookieParser()); 
 
@@ -187,7 +194,17 @@ app.listen(3000, () => {
 });
 
 
-//   console.log("Server is listening on port 3000");
-// });
+
+
+
+
+
+
+
+
+
+
+
+
 
 

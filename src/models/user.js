@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { GrValidate } = require("react-icons/gr");
 const validator = require("validator");
 const jwt = require("jsonwebtoken")
 const bcrypt  = require("bcrypt")

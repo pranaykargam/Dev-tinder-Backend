@@ -4,6 +4,7 @@ const { validateSignUpData} = require("../utils/validation")
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
+
 authRouter.post("/signup", async (req, res) => {
 
     try {
@@ -14,8 +15,19 @@ authRouter.post("/signup", async (req, res) => {
       // Encrypt the password
       const passwordHash = await bcrypt.hash(password,10);
       console.log(passwordHash);
+
+
+      // try {
+      //   // Validation of data
+      //   validateSignUpData(req)
+      //   const { firstName, lastName, emailId, password, age, gender,skills } = req.body;
+    
+      //   // Encrypt the password
+      //   const passwordHash = await bcrypt.hash(password,10);
+      //   console.log(passwordHash);
   
-  
+      
+      
      
   
      
@@ -47,43 +59,46 @@ authRouter.post("/signup", async (req, res) => {
     }
   });
 
-
-authRouter.post("/login", async (req, res) => {
-  console.log("🔔 Received login request:", req.body);
+ 
+  authRouter.post("/login", async (req, res) => {
+    console.log("🔔 Received login request:", req.body);
   
-
     try {
       const { emailId, password } = req.body;
   
-      const user = await User.findOne({ emailId: emailId });
+      // Find user using the User model
+      const user = await User.findOne({ emailId });
       if (!user) {
-        throw new Error("invalid email id");
+        throw new Error("Invalid email id");
       }
   
+      // Validate password using instance method
       const isPasswordValid = await user.validatePassword(password);
       if (!isPasswordValid) {
-        throw new Error("invalid password");
+        throw new Error("Invalid password");
       }
-  // create a JWT token 
-  // const token   = await jwt.sign({_id:user._id},"DEV@tinder7680",{
-  //   expiresIn:"7d",
-  // });
-  const token = await user.getJWT();
-  console.log("Generated token:", token);
-     
-  // Add the token to cookie and send the responce back to the user
-      // res.cookie("token", "vewckdiuvhagfukyregfyiwegdfiue");
-      res.cookie("token",token,{
-        expires:new Date(Date.now() + 8 * 3600000), 
+  
+      // Generate JWT token
+      const token = await user.getJWT();
+      console.log("Generated token:", token);
+  
+      // Set cookie with token
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000),
+        httpOnly: true,
       });
-      res.status(200).json({
-        message: "Login Successfully!!!!!",
+  
+      // Send response
+      res.status(200).send({
+        message: "Login successful!",
         user: {
           _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          skills: user.skills,
           emailId: user.emailId,
-          name: user.name,
         },
-        token: token,
+        token,
       });
   
     } catch (err) {
@@ -91,6 +106,7 @@ authRouter.post("/login", async (req, res) => {
       res.status(400).send("Error: " + err.message);
     }
   });
+  
 
   authRouter.post("/logout",async(req,res)=>{
     res.cookie("token", null,{
@@ -99,5 +115,6 @@ authRouter.post("/login", async (req, res) => {
     res.send("Logged out successfully!!!!!!")
   })
 
+ 
 
 module.exports = authRouter;
