@@ -15,25 +15,35 @@ profileRouter.get("/profile/view",UserAuth, async (req, res) => {
     }
   });
 
-  profileRouter.patch("/profile/edit",UserAuth, async (req, res) => {
-try{
-    if(!validateEditProfileData(req)){
-        throw new Error ("Invalid data provided for profile update")
-    }
 
-const loggedInUser = req.user;
-console.log(loggedInUser)
 
-Object.keys(req.body).forEach((key) => {
-    loggedInUser[key] = req.body[key];
-  });
-console.log("LoggedInUser")
-    await loggedInUser.save()
+profileRouter.patch("/profile/edit", UserAuth, async (req, res) => {
+  console.log("Incoming edit request body:", req.body);
+  try {
+      if (!validateEditProfileData(req)) {
+          throw new Error("Invalid data provided for profile update");
+      }
 
-res.send(`${loggedInUser.firstName}, your profile updated successfully!!`)
-  }catch(err){
-    return res.status(400).send("ERROR")
-}})
+      const loggedInUser = req.user;
+
+      // ✅ Skip any fields that are empty strings
+      Object.keys(req.body).forEach((key) => {
+          if (req.body[key] === '') {
+              return; // don't update this field
+          }
+          loggedInUser[key] = req.body[key];
+      });
+
+      await loggedInUser.save();
+
+      res.json(`${loggedInUser.firstName}, your profile updated successfully!!`);
+  } catch (err) {
+      console.error("Profile update error:", err.message);
+      return res.status(400).send("ERROR");
+  }
+});
+
+
 
 
 
