@@ -56,15 +56,18 @@ const userSchema = mongoose.Schema({
   //   }
   // },
 
-  photourl:{
-    type:String,
-    default:"https://www.vecteezy.com/vector-art/11401535-online-shopping-trolley-click-and-collect-order-vector-logo-design-templatehttps://in.pinterest.com/pin/47287864831917357/",
-    validate(value){
-      if(!validator.isURL(value)){
-        throw new Error("Invalid photo address")
+
+  photoUrl: {
+    type: String,
+    default: "https://www.flaticon.com/free-icon/user_149071?term=user&page=1&position=10&origin=tag&related_id=149071",
+    validate(value) {
+      if (!validator.isURL(value)) {
+        throw new Error("Invalid photo address");
       }
     }
   },
+  
+ 
   about:{ 
     type:String,
     default:"this is the default about of the user"
@@ -108,3 +111,20 @@ userSchema.methods.validatePassword = async function (passwordInputByUser){
 
 
 module.exports = mongoose.model("User", userSchema);
+
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);.
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);module.exports = mongoose.model("User", userSchema);
+
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);module.exports = mongoose.model("User", userSchema);
+
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);
