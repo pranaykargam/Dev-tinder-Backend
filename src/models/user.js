@@ -57,7 +57,7 @@ const userSchema = mongoose.Schema({
   // },
 
 
-  photoUrl: {
+  photouUrl: {
     type: String,
     default: "https://cdn-icons-png.flaticon.com/128/149/149071.png",
     validate(value) {
@@ -80,7 +80,14 @@ const userSchema = mongoose.Schema({
       },
       "Maximum 30 skills allowed"
     ]
-  }
+  },
+
+  // connections: {
+  //   type: [mongoose.Schema.Types.ObjectId],
+  //   ref: "User",
+  //   default: []
+  // }
+  
 },
 {
   timestamps:true,
