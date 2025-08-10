@@ -59,7 +59,7 @@ const userSchema = mongoose.Schema({
 
   photoUrl: {
     type: String,
-    default: "https://www.flaticon.com/free-icon/user_149071?term=user&page=1&position=10&origin=tag&related_id=149071",
+    default: "https://cdn-icons-png.flaticon.com/128/149/149071.png",
     validate(value) {
       if (!validator.isURL(value)) {
         throw new Error("Invalid photo address");
