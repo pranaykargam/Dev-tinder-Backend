@@ -15,12 +15,14 @@ const User = require("../models/user");
 userRouter.get("/user/requests/received",UserAuth, async (req, res) => {
   try{
     const loggedInUser = req.user;
+    console.log("LoggedInUser ID:", loggedInUser._id);
     const connectionRequest = await ConnectionRequest.find({
 
         toUserId: loggedInUser._id,
         status: "interested"
     }).populate("fromUserId", "firstName lastName age gender about skills")
-
+    console.log("Connection Requests Found:", connectionRequest.length);
+    console.log(connectionRequest);
     res.json({
       message: "Data fetched successfully",
       data: connectionRequest,
