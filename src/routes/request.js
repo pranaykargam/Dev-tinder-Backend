@@ -73,10 +73,13 @@ requestsRouter.post("/request/review/:status/:requestId", UserAuth, async (req, 
          message: `Invalid status type: '${status}'. Allowed values: accepted, rejected.`
        });
      }
+     console.log("requestId:", requestId);
+     console.log("loggedInUser._id:", loggedInUser._id);
 
      const connectionRequest = await ConnectionRequest.findOne({
        _id: requestId,
        toUserId:loggedInUser._id,
+       
       //  status: "interested"
      })
     if (!connectionRequest) {
@@ -88,6 +91,7 @@ requestsRouter.post("/request/review/:status/:requestId", UserAuth, async (req, 
     res.json({
       message: `${loggedInUser.firstName} has ${status} the connection request.`,
       data,
+      
     });
 }catch(err){
   res.status(400).send("ERROR: " + err.message);
