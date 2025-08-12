@@ -15,14 +15,6 @@ authRouter.post("/signup", async (req, res) => {
       // Encrypt the password
       const passwordHash = await bcrypt.hash(password,10);
       console.log(passwordHash);
-
-
-
-      
-      
-     
-  
-     
       const existingUser = await User.findOne({ emailId });
       if (existingUser) {
         return res.status(400).send("User already exists");
@@ -39,15 +31,20 @@ authRouter.post("/signup", async (req, res) => {
         skills,
       });
   
-      await user.save();
+      const savedUser =await user.save();
+      const token = await savedUser.getJWT();
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000), // 8 hours
+        httpOnly: true,
+      });
   
       res.send({
-       "message": "User signed up successfully",
-       
-      });
+       "message": "User signed up successfully",data:savedUser });
     } catch (err) {
       console.error("Signup error:", err);
       res.status(400).send("Error saving the user: " + err.message);
+    
+
     }
   });
 
