@@ -80,38 +80,6 @@ profileRouter.patch("/profile/password-forgot", async (req, res) => {
   }
 });
 
-profileRouter.patch("/profile/password-forgot", async (req, res) => {
-  try {
-    const { emailId, newPassword } = req.body;
-
-    if (!emailId || !newPassword) {
-      return res.status(400).send("Email and new password are required!!!");
-    }
-
-    // Check if user exists
-    const user = await User.findOne({ emailId });
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
-
-    // Validate password strength (optional but recommended)
-    if (newPassword.length < 6) {
-      return res.status(400).send("Password must be at least 6 characters");
-    }
-
-    // Hash the new password
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    // Update password
-    user.password = hashedPassword;
-    await user.save();
-
-    res.send("Password updated successfully!");
-  } catch (err) {
-    console.error("Forgot password error:", err.message);
-    res.status(500).send("Server error: " + err.message);
-  }
-});
 
 
 module.exports = profileRouter
