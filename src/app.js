@@ -189,9 +189,8 @@ app.delete("/user",async (req,res)=> {
 
 
 // Start the server
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
-});
+app.listen(3000, '0.0.0.0', () => console.log("Server running on 0.0.0.0"));
+
 
 
 
