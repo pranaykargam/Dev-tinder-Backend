@@ -81,7 +81,7 @@ userRouter.get("/user/connections",UserAuth,async(req,res)=>{
 
 
 
-userRouter.get("/user/feed", UserAuth, async (req, res) => {
+userRouter.get("/feed", UserAuth, async (req, res) => {
  
 
     try{
@@ -121,7 +121,7 @@ userRouter.get("/user/feed", UserAuth, async (req, res) => {
       res.send(users)
     
     }catch(err){
-      console.log("Error in /user/feed route:", err);
+      console.log("Error in /feed route:", err);
         res.status(400).json({message: err.message});
     }
 })
