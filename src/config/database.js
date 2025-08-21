@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   await mongoose.connect(
-    "mongodb+srv://sunnykargam1:Lalitha%409912@cluster0.lnfmdob.mongodb.net/devTinder"
+    "mongodb+srv://pranaykargam:Narsaiah@cluster0.lnfmdob.mongodb.net/devTinder"
   );
   
 };
@@ -20,6 +20,17 @@ connectDB()
   .catch((err) => {
     console.error("Database connection failed", );
   });
+
+  // .catch((err) => {
+  //   console.error("Database connection failed", );
+  // });
+  // .catch((err) => {
+  //   console.error("Database connection failed", );
+  // });
+  // .catch((err) => {
+  //   console.error("Database connection failed", );
+  // });
+
 
 
 
