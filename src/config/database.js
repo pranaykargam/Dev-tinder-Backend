@@ -21,6 +21,10 @@ connectDB()
     console.error("Database connection failed", );
   });
 
+  // .catch((err) => {
+  //   console.error("Database connection failed", );
+  // });
+
 
 
 
