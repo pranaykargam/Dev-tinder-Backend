@@ -4,10 +4,13 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   await mongoose.connect(
-    "mongodb+srv://pranaykargam:Narsaiah@cluster0.lnfmdob.mongodb.net/devTinder"
-  );
-  
+
+"mongodb+srv://sunnykargam1:Lalitha%409912@cluster0.lnfmdob.mongodb.net/"
+  )
+
 };
+
+// C5oprHGIrCFjTUkf
 
 connectDB()
   .then(() => {
