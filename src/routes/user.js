@@ -131,18 +131,6 @@ userRouter.get("/feed", UserAuth, async (req, res) => {
 
 
 
-module.exports = userRouter;
 
-module.exports = userRouter;
-
-module.exports = userRouter;
-module.exports = userRouter;
-
-module.exports = userRouter;
-module.exports = userRouter;
-module.exports = userRouter;
-module.exports = userRouter;
-
-module.exports = userRouter;
 
 
