@@ -5,12 +5,12 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   await mongoose.connect(
 
-"mongodb+srv://sunnykargam1:Lalitha%409912@cluster0.lnfmdob.mongodb.net/"
+"mongodb+srv://pranaykargam:DM6cyfU0oPrGx1uR@cluster0.lnfmdob.mongodb.net/"
   )
 
 };
 
-// C5oprHGIrCFjTUkf
+// DM6cyfU0oPrGx1uR
 
 connectDB()
   .then(() => {
